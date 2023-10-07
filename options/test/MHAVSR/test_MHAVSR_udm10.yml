@@ -1,0 +1,44 @@
+name: UDM10
+model_type: VideoRecurrentModel
+scale: 4
+num_gpu: auto  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Vid4
+    type: VideoRecurrentTestDataset
+    dataroot_gt: /mnt/ai2022/qxt/datasetsr/UMD10-sharp
+    dataroot_lq: /mnt/ai2022/qxt/datasetsr/UMD10BD
+    cache_data: True
+    io_backend:
+      type: disk
+    num_frame: -1 # not needed
+
+# network structures
+network_g:
+  type: MHAFNet
+  mid_channels: 64
+  num_blocks: 7
+  is_low_res_input: true
+  spynet_path: /mnt/ai2022/qxt/MHAVSR/experiments/pretrained_models/spynet_sintel_final-3d2a1287.pth
+
+# path
+path:
+  pretrain_network_g: /mnt/ai2022/qxt/MHAVSR/experiments/pretrained_models/vimeo90kBD.pth
+  strict_load_g: true
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: true
