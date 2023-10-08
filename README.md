@@ -16,5 +16,4 @@
 ### Model and Result
 
 >Pre-trained models can be downloaded from baidu cloud.
->https://pan.baidu.com/s/1htgV3LxGqrGlwv9DdxrNBg
->qwkx
+>https://pan.baidu.com/s/1htgV3LxGqrGlwv9DdxrNBg(qwkx)
